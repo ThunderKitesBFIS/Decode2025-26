@@ -22,7 +22,7 @@ public class CungDotest extends LinearOpMode{
         motorLeft.setDirection(Dcmotor.Direction.REVERSE);
         waitForStart;
         while (opModeIsActive()){
-            double left = -gamepad1.left_stick_y;
+                double left = -gamepad1.left_stick_y;
                 double right = -gamepad1.right_stick_y;
 
                 motorLeft.setPower(left);
