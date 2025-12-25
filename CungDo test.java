@@ -20,7 +20,7 @@ public class CungDotest extends LinearOpMode{
         motorLeft = hardwaremap.get(Dcmotor.class, "motorLeft");
         motorLeft = hardwaremap.get(Dcmotor.class, "motorRight");
         motorLeft.setDirection(Dcmotor.Direction.REVERSE);
-        waitForStart;
+        waitForStart();
         while (opModeIsActive()){
                 double left = -gamepad1.left_stick_y;
                 double right = -gamepad1.right_stick_y;
