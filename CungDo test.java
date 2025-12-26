@@ -18,7 +18,7 @@ public class CungDotest extends LinearOpMode{
 
     public void runOpMode() {
         motorLeft = hardwaremap.get(Dcmotor.class, "motorLeft");
-        motorLeft = hardwaremap.get(Dcmotor.class, "motorRight");
+        motorRight = hardwaremap.get(Dcmotor.class, "motorRight");
         motorLeft.setDirection(Dcmotor.Direction.REVERSE);
         waitForStart();
         while (opModeIsActive()){
