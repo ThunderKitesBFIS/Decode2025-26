@@ -72,10 +72,6 @@ public class CungDotestingv2 extends LinearOpMode {
             motorLeft.setPower(1);
             motorRight.setPower(1);
             sleep(800);
-            motorLeft.setPower(0);
-            motorRight.setPower(0);
-            motorLeft.setPower(0);
-            motorRight.setPower(0);
             telemetry.addData("Red Value", color1.red());
             telemetry.addData("Blue Value", color1.blue());
             telemetry.update();
