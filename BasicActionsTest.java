@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 @Autonomous(name="FunctionTest")
 public class BasicActionsTest extends LinearOpMode {
     private DcMotor motorLeft, motorRight;
-    private Actions actions;
+    private BasicActions actions;
     @Override
     public void runOpMode() {
         motorLeft = hardwareMap.get(DcMotor.class, "motorLeft");
