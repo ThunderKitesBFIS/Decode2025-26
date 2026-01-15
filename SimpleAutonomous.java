@@ -48,24 +48,26 @@ public class SimpleAutonomous extends LinearOpMode {
 
     // ========== FIELD COORDINATES ==========
 
+    private static final double FIELD_SIDE = 140.55; //centimeters
+
     // Starting positions (robot center)
-    private static final double[] RED_AUDIENCE_START = {108, 15};
-    private static final double[] RED_GOAL_START = {108, 120};
-    private static final double[] BLUE_AUDIENCE_START = {36, 15};
-    private static final double[] BLUE_GOAL_START = {36, 120};
+    private static final double[] RED_AUDIENCE_START = {83.5, 12}
+    private static final double[] RED_GOAL_START = {114, 114.5};
+    private static final double[] BLUE_AUDIENCE_START = {58, 12};
+    private static final double[] BLUE_GOAL_START = {27.5, 114.5};
 
     // Spike mark positions (3 per alliance)
-    private static final double[] RED_SPIKE_NEAR = {114, 48};
-    private static final double[] RED_SPIKE_MIDDLE = {114, 72};
-    private static final double[] RED_SPIKE_FAR = {114, 96};
+    private static final double[] RED_SPIKE_NEAR = {121, 34};
+    private static final double[] RED_SPIKE_MIDDLE = {121, 60};
+    private static final double[] RED_SPIKE_FAR = {121, 86};
 
-    private static final double[] BLUE_SPIKE_NEAR = {30, 48};
-    private static final double[] BLUE_SPIKE_MIDDLE = {30, 72};
-    private static final double[] BLUE_SPIKE_FAR = {30, 96};
+    private static final double[] BLUE_SPIKE_NEAR = {20, 34};
+    private static final double[] BLUE_SPIKE_MIDDLE = {20, 60};
+    private static final double[] BLUE_SPIKE_FAR = {20, 86};
 
     // Goal positions
-    private static final double[] RED_GOAL = {108, 144};
-    private static final double[] BLUE_GOAL = {36, 144};
+    private static final double[] RED_GOAL = {129, 130};
+    private static final double[] BLUE_GOAL = {12, 130};
 
     // Current position tracking
     private double currentX = 0;
@@ -132,8 +134,8 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Pick up 3 balls (drive through spike marks)
         driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);    // Near spike
-        driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]); // Middle spike
-        driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);       // Far spike
+        //driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]); // Middle spike
+        //driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);       // Far spike
 
         // Move to shooting position
         double shootX = RED_GOAL[0];
@@ -154,8 +156,8 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Pick up 3 balls (closest: far, middle, near)
         driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);
-        driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]);
-        driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);
+        //driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]);
+        //driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);
 
         // Move to shooting position
         double shootX = RED_GOAL[0];
@@ -175,8 +177,8 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Pick up 3 balls
         driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
-        driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
-        driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
+        //driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
+        //driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
 
         // Move to shooting position
         double shootX = BLUE_GOAL[0];
@@ -196,8 +198,8 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Pick up 3 balls (closest: far, middle, near)
         driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
-        driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
-        driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
+        //driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
+        //driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
 
         // Move to shooting position
         double shootX = BLUE_GOAL[0];
