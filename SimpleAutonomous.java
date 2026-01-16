@@ -152,8 +152,8 @@ public class SimpleAutonomous extends LinearOpMode {
         rotateTo(270);
         driveTo(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
         driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
-        rotateTo(45);
         driveTo(shootX, shootY);
+        rotateTo(45);
         shoot();
     }
 
@@ -167,6 +167,7 @@ public class SimpleAutonomous extends LinearOpMode {
         double shootX = RED_GOAL[0] - (DISTANCE_FROM_HOOP*1.414)/2;
         double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP*1.414)/2;
 
+        driveTo(RED_SPIKE_FAR[0][0], currentY);
         driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);
         rotateTo(270);
         driveTo(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);
