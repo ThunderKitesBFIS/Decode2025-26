@@ -132,19 +132,19 @@ public class SimpleAutonomous extends LinearOpMode {
         currentX = RED_AUDIENCE_START[0];
         currentY = RED_AUDIENCE_START[1];
         currentHeading = 90;  // Facing up
-
-        // Pick up 3 balls (drive through spike marks)
-        driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);    // Near spike
-        //driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]); // Middle spike
-        //driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);       // Far spike
-
-        // Move to shooting position
         double shootX = RED_GOAL[0];
         double shootY = RED_GOAL[1] - DISTANCE_FROM_HOOP;
+        // Pick up 3 balls (drive through spikes: closest, middle, farthest)
+        driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);  
         driveTo(shootX, shootY);
-
-        // Shoot
         shoot();
+        driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]);// Middle spike
+        driveTo(shootX, shootY);
+        shoot();
+        driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);// Far spike
+        driveTo(shootX, shootY);
+        shoot();
+
     }
 
     private void redGoalSide() {
@@ -154,17 +154,18 @@ public class SimpleAutonomous extends LinearOpMode {
         currentX = RED_GOAL_START[0];
         currentY = RED_GOAL_START[1];
         currentHeading = 90;
+        double shootX = RED_GOAL[0];
+        double shootY = RED_GOAL[1] - DISTANCE_FROM_HOOP;
 
         // Pick up 3 balls (closest: far, middle, near)
         driveTo(RED_SPIKE_FAR[0], RED_SPIKE_FAR[1]);
-        //driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]);
-        //driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);
-
-        // Move to shooting position
-        double shootX = RED_GOAL[0];
-        double shootY = RED_GOAL[1] - DISTANCE_FROM_HOOP;
         driveTo(shootX, shootY);
-
+        shoot();
+        driveTo(RED_SPIKE_MIDDLE[0], RED_SPIKE_MIDDLE[1]);
+        driveTo(shootX, shootY);
+        shoot();
+        driveTo(RED_SPIKE_NEAR[0], RED_SPIKE_NEAR[1]);
+        driveTo(shootX, shootY);
         shoot();
     }
 
@@ -175,17 +176,18 @@ public class SimpleAutonomous extends LinearOpMode {
         currentX = BLUE_AUDIENCE_START[0];
         currentY = BLUE_AUDIENCE_START[1];
         currentHeading = 90;
-
-        // Pick up 3 balls
-        driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
-        //driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
-        //driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
-
-        // Move to shooting position
         double shootX = BLUE_GOAL[0];
         double shootY = BLUE_GOAL[1] - DISTANCE_FROM_HOOP;
-        driveTo(shootX, shootY);
 
+        // Pick up 3 balls (closest, middle, farthest)
+        driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
+        driveTo(shootX, shootY);
+        shoot();
+        driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
+        driveTo(shootX, shootY);
+        shoot();
+        driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
+        driveTo(shootX, shootY);
         shoot();
     }
 
@@ -196,18 +198,20 @@ public class SimpleAutonomous extends LinearOpMode {
         currentX = BLUE_GOAL_START[0];
         currentY = BLUE_GOAL_START[1];
         currentHeading = 90;
+        double shootX = BLUE_GOAL[0];
+        double shootY = BLUE_GOAL[1] - DISTANCE_FROM_HOOP;
 
         // Pick up 3 balls (closest: far, middle, near)
         driveTo(BLUE_SPIKE_FAR[0], BLUE_SPIKE_FAR[1]);
-        //driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
-        //driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
-
-        // Move to shooting position
-        double shootX = BLUE_GOAL[0];
-        double shootY = BLUE_GOAL[1] - DISTANCE_FROM_HOOP;
         driveTo(shootX, shootY);
-
         shoot();
+        driveTo(BLUE_SPIKE_MIDDLE[0], BLUE_SPIKE_MIDDLE[1]);
+        driveTo(shootX, shootY);
+        shoot();
+        driveTo(BLUE_SPIKE_NEAR[0], BLUE_SPIKE_NEAR[1]);
+        driveTo(shootX, shootY);
+        shoot();
+
     }
 
     // ========== MOVEMENT FUNCTIONS ==========
