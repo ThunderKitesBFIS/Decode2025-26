@@ -48,7 +48,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
     // ========== FIELD COORDINATES ==========
 
-    private static final double FIELD_SIDE = 140.55; //centimeters
+    private static final double FIELD_SIDE = 144;
 
     // Starting positions (robot center)
     private static final double[] RED_AUDIENCE_START = {83.5, 12};
@@ -57,13 +57,13 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double[] BLUE_GOAL_START = {27.5, 114.5};
 
     // Spike mark positions (3 per alliance)
-    private static final double[][] RED_SPIKE_NEAR = {{121, 34},{111,34}};
-    private static final double[][] RED_SPIKE_MIDDLE = {{121, 60},{111,60}};
-    private static final double[][] RED_SPIKE_FAR = {{121, 86},{111,86}};
+    private static final double[][] RED_SPIKE_NEAR = {{115, 36},{125, 36}};
+    private static final double[][] RED_SPIKE_MIDDLE = {{115, 60},{125, 60}};
+    private static final double[][] RED_SPIKE_FAR = {{115, 84},{125, 84}};
 
-    private static final double[][] BLUE_SPIKE_NEAR = {{20, 34},{30,34}};
-    private static final double[][] BLUE_SPIKE_MIDDLE = {{20, 60},{30,60}};
-    private static final double[][] BLUE_SPIKE_FAR = {{20, 86},{30,86}};
+    private static final double[][] BLUE_SPIKE_NEAR = {{29, 36},{19,36}};
+    private static final double[][] BLUE_SPIKE_MIDDLE = {{29, 60},{19,60}};
+    private static final double[][] BLUE_SPIKE_FAR = {{29, 84},{19,84}};
 
     // Goal positions
     private static final double[] RED_GOAL = {129, 130};
