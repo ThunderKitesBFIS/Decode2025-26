@@ -66,8 +66,8 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double[][] BLUE_SPIKE_FAR = {{29, 84},{19,84}};
 
     // Goal positions
-    private static final double[] RED_GOAL = {129, 130};
-    private static final double[] BLUE_GOAL = {12, 130};
+    private static final double[] RED_GOAL = {132, 132};
+    private static final double[] BLUE_GOAL = {12, 132};
 
     // Current position tracking
     private double currentX = 0;
