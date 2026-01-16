@@ -40,18 +40,19 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double DISTANCE_FROM_HOOP = 48.0;  // inches (4 feet)
 
     // Motor configuration
-    private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex
-    private static final double WHEEL_DIAMETER_INCHES = 4.0;
-    private static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * Math.PI);
+    private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex Motor (REV-41-1291)
+    private static final double DRIVE_GEAR_RATIO = 12.0;       // 12:1 reduction (motor:wheel)
+    private static final double WHEEL_DIAMETER_INCHES = 3.0;
+    private static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_RATIO) / (WHEEL_DIAMETER_INCHES * Math.PI);
 
     private static final double DRIVE_SPEED = 0.6;
 
     // ========== FIELD COORDINATES ==========
 
-    private static final double FIELD_SIDE = 140.55; //centimeters
+    private static final double FIELD_SIDE = 140.55; //inches
 
     // Starting positions (robot center)
-    private static final double[] RED_AUDIENCE_START = {83.5, 12}
+    private static final double[] RED_AUDIENCE_START = {83.5, 12};
     private static final double[] RED_GOAL_START = {114, 114.5};
     private static final double[] BLUE_AUDIENCE_START = {58, 12};
     private static final double[] BLUE_GOAL_START = {27.5, 114.5};
