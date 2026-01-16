@@ -37,7 +37,7 @@ public class SimpleAutonomous extends LinearOpMode {
     // Shooting configuration (tune these values)
     private static final double SHOOTER_POWER = 0.0;  // 0.0 to 1.0
     private static final long SHOOTER_TIME_MS = 0;    // milliseconds
-    private static final double DISTANCE_FROM_HOOP = 48.0;  // inches (4 feet)
+    private static final double DISTANCE_FROM_HOOP = 78.7;  // inches (2 meters)
 
     // Motor configuration
     private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex
@@ -51,19 +51,25 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double FIELD_SIDE = 144;
 
     // Starting positions (robot center)
-    private static final double[] RED_AUDIENCE_START = {83.5, 12};
-    private static final double[] RED_GOAL_START = {114, 114.5};
-    private static final double[] BLUE_AUDIENCE_START = {58, 12};
-    private static final double[] BLUE_GOAL_START = {27.5, 114.5};
+    private static final double[] RED_AUDIENCE_START = {60, 12};
+    private static final double RED_AUDIENCE_HEADING = 0;
+    private static final double[] RED_GOAL_START = {14.7, 129.3};
+    private static final double RED_GOAL_HEADING = 180;
+    private static final double[] BLUE_AUDIENCE_START = {84, 12};
+    private static final double BLUE_AUDIENCE_HEADING = 0;
+    private static final double[] BLUE_GOAL_START = {129.3, 129.3};
+    private static final double BLUE_GOAL_HEADING = 180;
 
     // Spike mark positions (3 per alliance)
-    private static final double[][] RED_SPIKE_NEAR = {{115, 36},{125, 36}};
-    private static final double[][] RED_SPIKE_MIDDLE = {{115, 60},{125, 60}};
-    private static final double[][] RED_SPIKE_FAR = {{115, 84},{125, 84}};
+    private static final double[][] BLUE_SPIKE_NEAR = {{115-9, 36},{125+9, 36}};
+    private static final double[][] BLUE_SPIKE_MIDDLE = {{115-9, 60},{125+9, 60}};
+    private static final double[][] BLUE_SPIKE_FAR = {{115-9, 84},{125+9, 84}};
+    private static final double BLUE_SPIKE_HEADING = 90;
 
-    private static final double[][] BLUE_SPIKE_NEAR = {{29, 36},{19,36}};
-    private static final double[][] BLUE_SPIKE_MIDDLE = {{29, 60},{19,60}};
-    private static final double[][] BLUE_SPIKE_FAR = {{29, 84},{19,84}};
+    private static final double[][] RED_SPIKE_NEAR = {{29+9, 36},{19-9,36}};
+    private static final double[][] RED_SPIKE_MIDDLE = {{29+9, 60},{19-9,60}};
+    private static final double[][] RED_SPIKE_FAR = {{29+9, 84},{19-9,84}};
+    private static final double RED_SPIKE_HEADING = 270;
 
     // Goal positions
     private static final double[] RED_GOAL = {132, 132};
@@ -72,7 +78,7 @@ public class SimpleAutonomous extends LinearOpMode {
     // Current position tracking
     private double currentX = 0;
     private double currentY = 0;
-    private double currentHeading = 90;  // degrees, 0=right, 90=up, 180=left, 270=down
+    private double currentHeading = 0;  // degrees, 0=up, 90=right, 180=down, 270=left
 
     @Override
     public void runOpMode() {
