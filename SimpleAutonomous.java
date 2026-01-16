@@ -183,22 +183,24 @@ public class SimpleAutonomous extends LinearOpMode {
 
         currentX = BLUE_AUDIENCE_START[0];
         currentY = BLUE_AUDIENCE_START[1];
-        currentHeading = 90;
-        double shootX = BLUE_GOAL[0];
-        double shootY = BLUE_GOAL[1] - DISTANCE_FROM_HOOP;
+        currentHeading = 0;
+        double shootX = BLUE_GOAL[0] + (DISTANCE_FROM_HOOP*1.414)/2;
+        double shootY = BLUE_GOAL[1] - (DISTANCE_FROM_HOOP*1.414)/2;
 
         // Pick up 3 balls (closest, middle, farthest)
+        driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][1]);
+        rotateTo(90);
         driveTo(BLUE_SPIKE_NEAR[1][0], BLUE_SPIKE_NEAR[1][1]);
         driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][0]);
         driveTo(shootX, shootY);
+        rotateTo(315);
         shoot();
+        driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
+        rotateTo(90);
         driveTo(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
         driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
         driveTo(shootX, shootY);
-        shoot();
-        driveTo(BLUE_SPIKE_FAR[1][0], BLUE_SPIKE_FAR[1][1]);
-        driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);
-        driveTo(shootX, shootY);
+        rotateTo(315);
         shoot();
     }
 
@@ -208,22 +210,18 @@ public class SimpleAutonomous extends LinearOpMode {
 
         currentX = BLUE_GOAL_START[0];
         currentY = BLUE_GOAL_START[1];
-        currentHeading = 90;
-        double shootX = BLUE_GOAL[0];
-        double shootY = BLUE_GOAL[1] - DISTANCE_FROM_HOOP;
+        currentHeading = 180;
+        double shootX = BLUE_GOAL[0] + (DISTANCE_FROM_HOOP*1.414)/2;
+        double shootY = BLUE_GOAL[1] - (DISTANCE_FROM_HOOP*1.414)/2;
 
         // Pick up 3 balls (closest: far, middle, near)
+        driveTo(BLUE_SPIKE_FAR[0][0], currentY);
+        driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);
+        rotateTo(90);
         driveTo(BLUE_SPIKE_FAR[1][0], BLUE_SPIKE_FAR[1][1]);
         driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);
         driveTo(shootX, shootY);
-        shoot();
-        driveTo(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
-        driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
-        driveTo(shootX, shootY);
-        shoot();
-        driveTo(BLUE_SPIKE_NEAR[1][0], BLUE_SPIKE_NEAR[1][1]);
-        driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][1]);
-        driveTo(shootX, shootY);
+        rotateTo(315);
         shoot();
 
     }
@@ -479,4 +477,3 @@ public class SimpleAutonomous extends LinearOpMode {
         rightBack.setPower(0);
     }
 }
-
