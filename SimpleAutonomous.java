@@ -136,23 +136,25 @@ public class SimpleAutonomous extends LinearOpMode {
         // Set starting position
         currentX = RED_AUDIENCE_START[0];
         currentY = RED_AUDIENCE_START[1];
-        currentHeading = 90;  // Facing up
-        double shootX = RED_GOAL[0];
-        double shootY = RED_GOAL[1] - DISTANCE_FROM_HOOP;
-        // Pick up 3 balls (drive through spikes: closest, middle, farthest)
+        currentHeading = 0;  // Facing up
+        double shootX = RED_GOAL[0] + (DISTANCE_FROM_HOOP*1.414)/2;
+        double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP*1.414)/2;
+
+        driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[0][1]);
+        rotateTo(270);
         driveTo(RED_SPIKE_NEAR[1][0], RED_SPIKE_NEAR[1][1]);
         driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[0][1]);
         driveTo(shootX, shootY);
-        shoot();
-        driveTo(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);// Middle spike
-        driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
-        driveTo(shootX, shootY);
-        shoot();
-        driveTo(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);// Far spike
-        driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);
-        driveTo(shootX, shootY);
+        rotateTo(315);
         shoot();
 
+        driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);// Middle spike
+        rotateTo(270);
+        driveTo(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
+        driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
+        rotateTo(315);
+        driveTo(shootX, shootY);
+        shoot();
     }
 
     private void redGoalSide() {
@@ -161,22 +163,16 @@ public class SimpleAutonomous extends LinearOpMode {
 
         currentX = RED_GOAL_START[0];
         currentY = RED_GOAL_START[1];
-        currentHeading = 90;
-        double shootX = RED_GOAL[0];
-        double shootY = RED_GOAL[1] - DISTANCE_FROM_HOOP;
+        currentHeading = 180;
+        double shootX = RED_GOAL[0] + (DISTANCE_FROM_HOOP*1.414)/2;
+        double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP*1.414)/2;
 
-        // Pick up 3 balls (closest: far, middle, near)
+        driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);
+        rotateTo(270);
         driveTo(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);
         driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);
         driveTo(shootX, shootY);
-        shoot();
-        driveTo(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
-        driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
-        driveTo(shootX, shootY);
-        shoot();
-        driveTo(RED_SPIKE_NEAR[1][0], RED_SPIKE_NEAR[1][1]);
-        driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[1][1]);
-        driveTo(shootX, shootY);
+        rotateTo(315);
         shoot();
     }
 
@@ -229,6 +225,77 @@ public class SimpleAutonomous extends LinearOpMode {
         driveTo(shootX, shootY);
         shoot();
 
+    }
+
+    // ========== CONFIGURATION ========== (add this constant with the others)
+
+    // Add this near the other motor configuration constants
+    private static final double ROBOT_WIDTH_INCHES = 15.0;  // Distance between left and right wheels (tune this!)
+
+// ========== MOVEMENT FUNCTIONS ========== (add this method with driveInches and strafeInches)
+
+    /**
+     * Rotate to target heading (0=up, 90=right, 180=down, 270=left)
+     */
+    private void rotateTo(double targetHeading) {
+        // Calculate shortest rotation angle
+        double deltaAngle = targetHeading - currentHeading;
+
+        // Normalize to -180 to +180 range
+        while (deltaAngle > 180) deltaAngle -= 360;
+        while (deltaAngle < -180) deltaAngle += 360;
+
+        telemetry.addData("Rotating", "from %.0f to %.0f (%.0f degrees)",
+                currentHeading, targetHeading, deltaAngle);
+        telemetry.update();
+
+        if (Math.abs(deltaAngle) < 2) {  // Already close enough
+            return;
+        }
+
+        // Calculate arc length each wheel travels
+        // Arc = (angle in radians) * (robot_width / 2)
+        double arcLength = Math.toRadians(deltaAngle) * (ROBOT_WIDTH_INCHES / 2.0);
+        int target = (int)(arcLength * COUNTS_PER_INCH);
+
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // Rotation: LF+, RF-, LB+, RB- for clockwise (positive angle)
+        leftFront.setTargetPosition(target);
+        rightFront.setTargetPosition(-target);
+        leftBack.setTargetPosition(target);
+        rightBack.setTargetPosition(-target);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(DRIVE_SPEED);
+        rightFront.setPower(DRIVE_SPEED);
+        leftBack.setPower(DRIVE_SPEED);
+        rightBack.setPower(DRIVE_SPEED);
+
+        while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy()) {
+            telemetry.addData("Rotating", "%.0f degrees", deltaAngle);
+            telemetry.addData("Position", leftFront.getCurrentPosition());
+            telemetry.update();
+        }
+
+        stopMotors();
+
+        // Update heading
+        currentHeading = targetHeading;
+
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        //sleep(200);  // Brief pause after rotation
     }
 
     // ========== MOVEMENT FUNCTIONS ==========
