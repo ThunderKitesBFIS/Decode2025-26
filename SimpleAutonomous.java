@@ -40,16 +40,15 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double DISTANCE_FROM_HOOP = 48.0;  // inches (4 feet)
 
     // Motor configuration
-    private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex Motor (REV-41-1291)
-    private static final double DRIVE_GEAR_RATIO = 12.0;       // 12:1 reduction (motor:wheel)
-    private static final double WHEEL_DIAMETER_INCHES = 3.0;
-    private static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_RATIO) / (WHEEL_DIAMETER_INCHES * Math.PI);
+    private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex
+    private static final double WHEEL_DIAMETER_INCHES = 4.0;
+    private static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * Math.PI);
 
     private static final double DRIVE_SPEED = 0.6;
 
     // ========== FIELD COORDINATES ==========
 
-    private static final double FIELD_SIDE = 140.55; //inches
+    private static final double FIELD_SIDE = 140.55; //centimeters
 
     // Starting positions (robot center)
     private static final double[] RED_AUDIENCE_START = {83.5, 12};
@@ -58,13 +57,13 @@ public class SimpleAutonomous extends LinearOpMode {
     private static final double[] BLUE_GOAL_START = {27.5, 114.5};
 
     // Spike mark positions (3 per alliance)
-    private static final double[] RED_SPIKE_NEAR = {121, 34};
-    private static final double[] RED_SPIKE_MIDDLE = {121, 60};
-    private static final double[] RED_SPIKE_FAR = {121, 86};
+    private static final double[][] RED_SPIKE_NEAR = {{121, 34},{111,34}};
+    private static final double[][] RED_SPIKE_MIDDLE = {{121, 60},{111,60}};
+    private static final double[][] RED_SPIKE_FAR = {{121, 86},{111,86}};
 
-    private static final double[] BLUE_SPIKE_NEAR = {20, 34};
-    private static final double[] BLUE_SPIKE_MIDDLE = {20, 60};
-    private static final double[] BLUE_SPIKE_FAR = {20, 86};
+    private static final double[][] BLUE_SPIKE_NEAR = {{20, 34},{30,34}};
+    private static final double[][] BLUE_SPIKE_MIDDLE = {{20, 60},{30,60}};
+    private static final double[][] BLUE_SPIKE_FAR = {{20, 86},{30,86}};
 
     // Goal positions
     private static final double[] RED_GOAL = {129, 130};
