@@ -47,6 +47,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
     // SELECT STARTING POSITION (1-4)
     private static final int STARTING_POSITION = 1;  // CHANGE THIS!
+    private static final bool TAKE_MIDDLE_SPIKE = false; // CHANGE THIS
 
     // Motor configuration
     //TODO TUNE THESE
@@ -199,6 +200,30 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Shoot all artifacts
         shootAll();
+
+        if(TAKE_MIDDLE_SPIKE){
+            // Drive to spike mark entry point
+            driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
+
+            // Drive through spike mark with intake running
+            driveWithIntake(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
+
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(RED_SPIKE_MIDDLE[1][0] - RED_SPIKE_MIDDLE[0][0], 2) +
+                            Math.pow(RED_SPIKE_MIDDLE[1][1] - RED_SPIKE_MIDDLE[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = RED_SPIKE_MIDDLE[0][0];
+            currentY = RED_SPIKE_MIDDLE[0][1];
+
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(45);
+
+            // Shoot all artifacts
+            shootAll();
+        }
     }
 
     private void redGoalSide() {
@@ -236,6 +261,30 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Shoot all artifacts
         shootAll();
+
+        if(TAKE_MIDDLE_SPIKE){
+            // Drive to spike mark entry point
+            driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
+
+            // Drive through spike mark with intake running
+            driveWithIntake(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
+
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(RED_SPIKE_MIDDLE[1][0] - RED_SPIKE_MIDDLE[0][0], 2) +
+                            Math.pow(RED_SPIKE_MIDDLE[1][1] - RED_SPIKE_MIDDLE[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = RED_SPIKE_MIDDLE[0][0];
+            currentY = RED_SPIKE_MIDDLE[0][1];
+
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(45);
+
+            // Shoot all artifacts
+            shootAll();
+        }
     }
 
     private void blueAudienceSide() {
@@ -272,6 +321,30 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Shoot all artifacts
         shootAll();
+
+        if(TAKE_MIDDLE_SPIKE){
+            // Drive to spike mark entry point
+            driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
+
+            // Drive through spike mark with intake running
+            driveWithIntake(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
+
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(BLUE_SPIKE_MIDDLE[1][0] - BLUE_SPIKE_MIDDLE[0][0], 2) +
+                            Math.pow(BLUE_SPIKE_MIDDLE[1][1] - BLUE_SPIKE_MIDDLE[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = BLUE_SPIKE_MIDDLE[0][0];
+            currentY = BLUE_SPIKE_MIDDLE[0][1];
+
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(315);
+
+            // Shoot all artifacts
+            shootAll();
+        }
     }
 
     private void blueGoalSide() {
@@ -309,6 +382,30 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Shoot all artifacts
         shootAll();
+
+        if(TAKE_MIDDLE_SPIKE){
+            // Drive to spike mark entry point
+            driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
+
+            // Drive through spike mark with intake running
+            driveWithIntake(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
+
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(BLUE_SPIKE_MIDDLE[1][0] - BLUE_SPIKE_MIDDLE[0][0], 2) +
+                            Math.pow(BLUE_SPIKE_MIDDLE[1][1] - BLUE_SPIKE_MIDDLE[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = BLUE_SPIKE_MIDDLE[0][0];
+            currentY = BLUE_SPIKE_MIDDLE[0][1];
+
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(315);
+
+            // Shoot all artifacts
+            shootAll();
+        }
     }
 
     // ========== MOVEMENT FUNCTIONS ==========
