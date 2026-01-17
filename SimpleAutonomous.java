@@ -178,6 +178,10 @@ public class SimpleAutonomous extends LinearOpMode {
         double shootX = RED_GOAL[0] - (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
 
+        driveTo(72, currentY);
+        driveTo(shootX, shootY);
+        shootAll();
+
         // Drive to spike mark entry point
         driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[0][1]);
 
@@ -213,6 +217,10 @@ public class SimpleAutonomous extends LinearOpMode {
         // Calculate shooting position (diagonal from goal)
         double shootX = RED_GOAL[0] - (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
+
+        //driveTo(72, currentY);
+        driveTo(shootX, shootY);
+        shootAll();
 
         // Drive to spike mark entry point (far spike is closest from goal side)
         driveTo(RED_SPIKE_FAR[0][0], currentY);           		// First: correct X
@@ -251,6 +259,10 @@ public class SimpleAutonomous extends LinearOpMode {
         double shootX = BLUE_GOAL[0] + (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = BLUE_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
 
+        driveTo(72, currentY);
+        driveTo(shootX, shootY);
+        shootAll();
+
         // Drive to spike mark entry point
         driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][1]);
 
@@ -286,6 +298,10 @@ public class SimpleAutonomous extends LinearOpMode {
         // Calculate shooting position (diagonal from goal)
         double shootX = BLUE_GOAL[0] + (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = BLUE_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
+
+        //driveTo(72, currentY);
+        driveTo(shootX, shootY);
+        shootAll();
 
         // Drive to spike mark entry point (far spike is closest from goal side)
         driveTo(BLUE_SPIKE_FAR[0][0], currentY);           		// First: correct X
