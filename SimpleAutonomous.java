@@ -47,7 +47,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
     // SELECT STARTING POSITION (1-4)
     private static final int STARTING_POSITION = 1;  // CHANGE THIS!
-    private static final bool TAKE_MIDDLE_SPIKE = false; // CHANGE THIS
+    private static final boolean TAKE_MIDDLE_SPIKE = true; // CHANGE THIS
 
     // Motor configuration
     //TODO TUNE THESE
@@ -179,7 +179,7 @@ public class SimpleAutonomous extends LinearOpMode {
         double shootX = RED_GOAL[0] - (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = RED_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
 
-        driveTo(72, currentY);
+        //driveTo(72, currentY);
         driveTo(shootX, shootY);
         shootAll();
 
@@ -200,7 +200,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Drive to shooting position and face the goal
         driveTo(shootX, shootY);
-        rotateTo(45);
+        rotateTo(45+180);
 
         // Shoot all artifacts
         shootAll();
@@ -213,7 +213,7 @@ public class SimpleAutonomous extends LinearOpMode {
             driveWithIntake(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
 
             // Drive backward to entry point for safety (faster than rotating)
-            double spikeDistance = Math.sqrt(
+            spikeDistance = Math.sqrt(
                     Math.pow(RED_SPIKE_MIDDLE[1][0] - RED_SPIKE_MIDDLE[0][0], 2) +
                             Math.pow(RED_SPIKE_MIDDLE[1][1] - RED_SPIKE_MIDDLE[0][1], 2)
             );
@@ -223,7 +223,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
             // Drive to shooting position and face the goal
             driveTo(shootX, shootY);
-            rotateTo(45);
+            rotateTo(45+180);
 
             // Shoot all artifacts
             shootAll();
@@ -248,8 +248,8 @@ public class SimpleAutonomous extends LinearOpMode {
         shootAll();
 
         // Drive to spike mark entry point (far spike is closest from goal side)
-        driveTo(RED_SPIKE_FAR[0][0], currentY);           		// First: correct X
-        driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);    	// Then: correct Y
+        driveTo(RED_SPIKE_FAR[0][0], currentY);                   // First: correct X
+        driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);        // Then: correct Y
 
         // Drive through spike mark with intake running
         driveWithIntake(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);
@@ -265,7 +265,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Drive to shooting position and face the goal
         driveTo(shootX, shootY);
-        rotateTo(45);
+        rotateTo(45+180);
 
         // Shoot all artifacts
         shootAll();
@@ -278,7 +278,7 @@ public class SimpleAutonomous extends LinearOpMode {
             driveWithIntake(RED_SPIKE_MIDDLE[1][0], RED_SPIKE_MIDDLE[1][1]);
 
             // Drive backward to entry point for safety (faster than rotating)
-            double spikeDistance = Math.sqrt(
+            spikeDistance = Math.sqrt(
                     Math.pow(RED_SPIKE_MIDDLE[1][0] - RED_SPIKE_MIDDLE[0][0], 2) +
                             Math.pow(RED_SPIKE_MIDDLE[1][1] - RED_SPIKE_MIDDLE[0][1], 2)
             );
@@ -288,7 +288,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
             // Drive to shooting position and face the goal
             driveTo(shootX, shootY);
-            rotateTo(45);
+            rotateTo(45+180);
 
             // Shoot all artifacts
             shootAll();
@@ -308,7 +308,7 @@ public class SimpleAutonomous extends LinearOpMode {
         double shootX = BLUE_GOAL[0] + (DISTANCE_FROM_HOOP * 1.414) / 2;
         double shootY = BLUE_GOAL[1] - (DISTANCE_FROM_HOOP * 1.414) / 2;
 
-        driveTo(72, currentY);
+        //driveTo(72, currentY);
         driveTo(shootX, shootY);
         shootAll();
 
@@ -329,7 +329,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Drive to shooting position and face the goal
         driveTo(shootX, shootY);
-        rotateTo(315);
+        rotateTo(315-180);
 
         // Shoot all artifacts
         shootAll();
@@ -342,7 +342,7 @@ public class SimpleAutonomous extends LinearOpMode {
             driveWithIntake(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
 
             // Drive backward to entry point for safety (faster than rotating)
-            double spikeDistance = Math.sqrt(
+            spikeDistance = Math.sqrt(
                     Math.pow(BLUE_SPIKE_MIDDLE[1][0] - BLUE_SPIKE_MIDDLE[0][0], 2) +
                             Math.pow(BLUE_SPIKE_MIDDLE[1][1] - BLUE_SPIKE_MIDDLE[0][1], 2)
             );
@@ -352,7 +352,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
             // Drive to shooting position and face the goal
             driveTo(shootX, shootY);
-            rotateTo(315);
+            rotateTo(315-180);
 
             // Shoot all artifacts
             shootAll();
@@ -377,7 +377,7 @@ public class SimpleAutonomous extends LinearOpMode {
         shootAll();
 
         // Drive to spike mark entry point (far spike is closest from goal side)
-        driveTo(BLUE_SPIKE_FAR[0][0], currentY);           		// First: correct X
+        driveTo(BLUE_SPIKE_FAR[0][0], currentY);                   // First: correct X
         driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);    // Then: correct Y
 
         // Drive through spike mark with intake running
@@ -394,7 +394,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Drive to shooting position and face the goal
         driveTo(shootX, shootY);
-        rotateTo(315);
+        rotateTo(315-180);
 
         // Shoot all artifacts
         shootAll();
@@ -407,7 +407,7 @@ public class SimpleAutonomous extends LinearOpMode {
             driveWithIntake(BLUE_SPIKE_MIDDLE[1][0], BLUE_SPIKE_MIDDLE[1][1]);
 
             // Drive backward to entry point for safety (faster than rotating)
-            double spikeDistance = Math.sqrt(
+            spikeDistance = Math.sqrt(
                     Math.pow(BLUE_SPIKE_MIDDLE[1][0] - BLUE_SPIKE_MIDDLE[0][0], 2) +
                             Math.pow(BLUE_SPIKE_MIDDLE[1][1] - BLUE_SPIKE_MIDDLE[0][1], 2)
             );
@@ -417,7 +417,7 @@ public class SimpleAutonomous extends LinearOpMode {
 
             // Drive to shooting position and face the goal
             driveTo(shootX, shootY);
-            rotateTo(315);
+            rotateTo(315-180);
 
             // Shoot all artifacts
             shootAll();
@@ -511,10 +511,10 @@ public class SimpleAutonomous extends LinearOpMode {
         resetEncoders();
 
         // Rotation: left wheels forward, right wheels backward for clockwise (positive angle)
-        leftFront.setTargetPosition(target);
-        rightFront.setTargetPosition(-target);
-        leftBack.setTargetPosition(target);
-        rightBack.setTargetPosition(-target);
+        leftFront.setTargetPosition(-target);
+        rightFront.setTargetPosition(target);
+        leftBack.setTargetPosition(-target);
+        rightBack.setTargetPosition(target);
 
         runToPosition(ROTATE_SPEED);
 
@@ -631,6 +631,10 @@ public class SimpleAutonomous extends LinearOpMode {
         telemetry.addData("Action", "SHOOTING ALL ARTIFACTS");
         telemetry.update();
 
+        // Spin up shooter wheels
+        setShooterPower(SHOOTER_POWER);
+        sleep(SHOOTER_SPINUP_MS*5);
+
         for (int i = 0; i < NUM_ARTIFACTS; i++) {
             telemetry.addData("Shooting", "Artifact %d of %d", i + 1, NUM_ARTIFACTS);
             telemetry.update();
@@ -644,6 +648,9 @@ public class SimpleAutonomous extends LinearOpMode {
             }
         }
 
+        // Stop shooter wheels
+        setShooterPower(0);
+
         telemetry.addData("Status", "All shots complete");
         telemetry.update();
     }
@@ -656,19 +663,12 @@ public class SimpleAutonomous extends LinearOpMode {
         telemetry.addData("Catapult", "SPINNING UP");
         telemetry.update();
 
-        // Spin up shooter wheels
-        setShooterPower(SHOOTER_POWER);
-        sleep(SHOOTER_SPINUP_MS);
-
         telemetry.addData("Catapult", "FIRING");
         telemetry.update();
 
         // Move servo smoothly to fire position
         moveServoSmooth(upservo, CATAPULT_FIRE, SERVO_STEP);
         sleep(CATAPULT_FIRE_TIME_MS);
-
-        // Stop shooter wheels
-        setShooterPower(0);
 
         // Return to rest position
         moveServoSmooth(upservo, CATAPULT_REST, SERVO_STEP);
@@ -776,10 +776,10 @@ public class SimpleAutonomous extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
         // Set directions (matching Test class pattern)
-        leftFront.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.FORWARD);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         // Set zero power behavior
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -808,9 +808,9 @@ public class SimpleAutonomous extends LinearOpMode {
 
         // Shooter wheel motors
         try {
-            shooterUp = hardwareMap.get(DcMotor.class, "shooterUp");
-            shooterDown = hardwareMap.get(DcMotor.class, "shooterDown");
-            shooterUp.setDirection(DcMotor.Direction.FORWARD);
+            shooterUp = hardwareMap.get(DcMotor.class, "flywheel1");
+            shooterDown = hardwareMap.get(DcMotor.class, "flywheel2");
+            shooterUp.setDirection(DcMotor.Direction.REVERSE);
             shooterDown.setDirection(DcMotor.Direction.FORWARD);
             shooterUp.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
             shooterDown.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
