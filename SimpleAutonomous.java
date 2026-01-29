@@ -46,14 +46,15 @@ public class SimpleAutonomous extends LinearOpMode {
     // ========== CONFIGURATION ==========
 
     // SELECT STARTING POSITION (1-4)
-    private static final int STARTING_POSITION = 1;  // CHANGE THIS!
-    private static final boolean TAKE_MIDDLE_SPIKE = true; // CHANGE THIS
+    private static final int STARTING_POSITION = 5;  // CHANGE THIS!
+    private static final boolean TAKE_MIDDLE_SPIKE = false; // CHANGE THIS
+    private static final boolean TAKE_CLOSEST_SPIKE = false; // CHANGE THIS
 
     // Motor configuration
     //TODO TUNE THESE
     private static final double COUNTS_PER_MOTOR_REV = 537.7;  // REV HD Hex
     private static final double WHEEL_DIAMETER_INCHES = 4.0;
-    private static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / (WHEEL_DIAMETER_INCHES * Math.PI);
+    private static final double COUNTS_PER_INCH = COUNTS_PER_MOTOR_REV / (WHEEL_DIAMETER_INCHES * Math.PI) / 1.6zXC;
     private static final double ROBOT_WIDTH_INCHES = 15.0;  // Distance between left and right wheels
 
     // Movement speeds
@@ -147,6 +148,10 @@ public class SimpleAutonomous extends LinearOpMode {
                 case 4:
                     blueGoalSide();
                     break;
+                case 5:
+                    // For testing: drive forward 5 inches
+                    driveForward(5);
+                    break;
                 default:
                     telemetry.addData("ERROR", "Invalid starting position!");
                     telemetry.update();
@@ -182,29 +187,30 @@ public class SimpleAutonomous extends LinearOpMode {
         //driveTo(72, currentY);
         driveTo(shootX, shootY);
         shootAll();
+        double spikeDistance;
+        if(TAKE_CLOSEST_SPIKE) {
+            // Drive to spike mark entry point
+            driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[0][1]);
 
-        // Drive to spike mark entry point
-        driveTo(RED_SPIKE_NEAR[0][0], RED_SPIKE_NEAR[0][1]);
+            // Drive through spike mark with intake running
+            driveWithIntake(RED_SPIKE_NEAR[1][0], RED_SPIKE_NEAR[1][1]);
 
-        // Drive through spike mark with intake running
-        driveWithIntake(RED_SPIKE_NEAR[1][0], RED_SPIKE_NEAR[1][1]);
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(RED_SPIKE_NEAR[1][0] - RED_SPIKE_NEAR[0][0], 2) +
+                            Math.pow(RED_SPIKE_NEAR[1][1] - RED_SPIKE_NEAR[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = RED_SPIKE_NEAR[0][0];
+            currentY = RED_SPIKE_NEAR[0][1];
 
-        // Drive backward to entry point for safety (faster than rotating)
-        double spikeDistance = Math.sqrt(
-                Math.pow(RED_SPIKE_NEAR[1][0] - RED_SPIKE_NEAR[0][0], 2) +
-                        Math.pow(RED_SPIKE_NEAR[1][1] - RED_SPIKE_NEAR[0][1], 2)
-        );
-        driveBackward(spikeDistance);
-        currentX = RED_SPIKE_NEAR[0][0];
-        currentY = RED_SPIKE_NEAR[0][1];
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(45 + 180);
 
-        // Drive to shooting position and face the goal
-        driveTo(shootX, shootY);
-        rotateTo(45+180);
-
-        // Shoot all artifacts
-        shootAll();
-
+            // Shoot all artifacts
+            shootAll();
+        }
         if(TAKE_MIDDLE_SPIKE){
             // Drive to spike mark entry point
             driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
@@ -247,29 +253,30 @@ public class SimpleAutonomous extends LinearOpMode {
         driveTo(shootX, shootY);
         shootAll();
 
-        // Drive to spike mark entry point (far spike is closest from goal side)
-        driveTo(RED_SPIKE_FAR[0][0], currentY);                   // First: correct X
-        driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);        // Then: correct Y
+        if(TAKE_CLOSEST_SPIKE) {
+            // Drive to spike mark entry point (far spike is closest from goal side)
+            driveTo(RED_SPIKE_FAR[0][0], currentY);                   // First: correct X
+            driveTo(RED_SPIKE_FAR[0][0], RED_SPIKE_FAR[0][1]);        // Then: correct Y
 
-        // Drive through spike mark with intake running
-        driveWithIntake(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);
+            // Drive through spike mark with intake running
+            driveWithIntake(RED_SPIKE_FAR[1][0], RED_SPIKE_FAR[1][1]);
 
-        // Drive backward to entry point for safety (faster than rotating)
-        double spikeDistance = Math.sqrt(
-                Math.pow(RED_SPIKE_FAR[1][0] - RED_SPIKE_FAR[0][0], 2) +
-                        Math.pow(RED_SPIKE_FAR[1][1] - RED_SPIKE_FAR[0][1], 2)
-        );
-        driveBackward(spikeDistance);
-        currentX = RED_SPIKE_FAR[0][0];
-        currentY = RED_SPIKE_FAR[0][1];
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(RED_SPIKE_FAR[1][0] - RED_SPIKE_FAR[0][0], 2) +
+                            Math.pow(RED_SPIKE_FAR[1][1] - RED_SPIKE_FAR[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = RED_SPIKE_FAR[0][0];
+            currentY = RED_SPIKE_FAR[0][1];
 
-        // Drive to shooting position and face the goal
-        driveTo(shootX, shootY);
-        rotateTo(45+180);
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(45 + 180);
 
-        // Shoot all artifacts
-        shootAll();
-
+            // Shoot all artifacts
+            shootAll();
+        }
         if(TAKE_MIDDLE_SPIKE){
             // Drive to spike mark entry point
             driveTo(RED_SPIKE_MIDDLE[0][0], RED_SPIKE_MIDDLE[0][1]);
@@ -311,29 +318,29 @@ public class SimpleAutonomous extends LinearOpMode {
         //driveTo(72, currentY);
         driveTo(shootX, shootY);
         shootAll();
+        if(TAKE_CLOSEST_SPIKE) {
+            // Drive to spike mark entry point
+            driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][1]);
 
-        // Drive to spike mark entry point
-        driveTo(BLUE_SPIKE_NEAR[0][0], BLUE_SPIKE_NEAR[0][1]);
+            // Drive through spike mark with intake running
+            driveWithIntake(BLUE_SPIKE_NEAR[1][0], BLUE_SPIKE_NEAR[1][1]);
 
-        // Drive through spike mark with intake running
-        driveWithIntake(BLUE_SPIKE_NEAR[1][0], BLUE_SPIKE_NEAR[1][1]);
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(BLUE_SPIKE_NEAR[1][0] - BLUE_SPIKE_NEAR[0][0], 2) +
+                            Math.pow(BLUE_SPIKE_NEAR[1][1] - BLUE_SPIKE_NEAR[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = BLUE_SPIKE_NEAR[0][0];
+            currentY = BLUE_SPIKE_NEAR[0][1];
 
-        // Drive backward to entry point for safety (faster than rotating)
-        double spikeDistance = Math.sqrt(
-                Math.pow(BLUE_SPIKE_NEAR[1][0] - BLUE_SPIKE_NEAR[0][0], 2) +
-                        Math.pow(BLUE_SPIKE_NEAR[1][1] - BLUE_SPIKE_NEAR[0][1], 2)
-        );
-        driveBackward(spikeDistance);
-        currentX = BLUE_SPIKE_NEAR[0][0];
-        currentY = BLUE_SPIKE_NEAR[0][1];
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(315 - 180);
 
-        // Drive to shooting position and face the goal
-        driveTo(shootX, shootY);
-        rotateTo(315-180);
-
-        // Shoot all artifacts
-        shootAll();
-
+            // Shoot all artifacts
+            shootAll();
+        }
         if(TAKE_MIDDLE_SPIKE){
             // Drive to spike mark entry point
             driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
@@ -375,30 +382,30 @@ public class SimpleAutonomous extends LinearOpMode {
         //driveTo(72, currentY);
         driveTo(shootX, shootY);
         shootAll();
+        if(TAKE_CLOSEST_SPIKE) {
+            // Drive to spike mark entry point (far spike is closest from goal side)
+            driveTo(BLUE_SPIKE_FAR[0][0], currentY);                   // First: correct X
+            driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);    // Then: correct Y
 
-        // Drive to spike mark entry point (far spike is closest from goal side)
-        driveTo(BLUE_SPIKE_FAR[0][0], currentY);                   // First: correct X
-        driveTo(BLUE_SPIKE_FAR[0][0], BLUE_SPIKE_FAR[0][1]);    // Then: correct Y
+            // Drive through spike mark with intake running
+            driveWithIntake(BLUE_SPIKE_FAR[1][0], BLUE_SPIKE_FAR[1][1]);
 
-        // Drive through spike mark with intake running
-        driveWithIntake(BLUE_SPIKE_FAR[1][0], BLUE_SPIKE_FAR[1][1]);
+            // Drive backward to entry point for safety (faster than rotating)
+            double spikeDistance = Math.sqrt(
+                    Math.pow(BLUE_SPIKE_FAR[1][0] - BLUE_SPIKE_FAR[0][0], 2) +
+                            Math.pow(BLUE_SPIKE_FAR[1][1] - BLUE_SPIKE_FAR[0][1], 2)
+            );
+            driveBackward(spikeDistance);
+            currentX = BLUE_SPIKE_FAR[0][0];
+            currentY = BLUE_SPIKE_FAR[0][1];
 
-        // Drive backward to entry point for safety (faster than rotating)
-        double spikeDistance = Math.sqrt(
-                Math.pow(BLUE_SPIKE_FAR[1][0] - BLUE_SPIKE_FAR[0][0], 2) +
-                        Math.pow(BLUE_SPIKE_FAR[1][1] - BLUE_SPIKE_FAR[0][1], 2)
-        );
-        driveBackward(spikeDistance);
-        currentX = BLUE_SPIKE_FAR[0][0];
-        currentY = BLUE_SPIKE_FAR[0][1];
+            // Drive to shooting position and face the goal
+            driveTo(shootX, shootY);
+            rotateTo(315 - 180);
 
-        // Drive to shooting position and face the goal
-        driveTo(shootX, shootY);
-        rotateTo(315-180);
-
-        // Shoot all artifacts
-        shootAll();
-
+            // Shoot all artifacts
+            shootAll();
+        }
         if(TAKE_MIDDLE_SPIKE){
             // Drive to spike mark entry point
             driveTo(BLUE_SPIKE_MIDDLE[0][0], BLUE_SPIKE_MIDDLE[0][1]);
