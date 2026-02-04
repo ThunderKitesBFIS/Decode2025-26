@@ -100,7 +100,7 @@ public class EncoderCalibration extends LinearOpMode {
             telemetry.addData("", "");
             telemetry.addData(">>> COUNTS PER INCH <<<", "%.2f", countsPerInch);
             telemetry.addData("", "");
-            telemetry.addData("Instructions", "Use this value in SimpleAutonomous");
+            telemetry.addData("Instructions", "Use this value in SimpleAutonomous2");
             telemetry.update();
         }
     }
