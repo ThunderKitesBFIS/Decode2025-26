@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 
-@TeleOp(name="Voltage Compensation with Jump Detection")
-public class VoltageCompensationWithJumpDetection extends LinearOpMode {
+@TeleOp(name="Voltage Compensation")
+public class VoltageCompensation extends LinearOpMode {
     
     private DcMotor motor1, motor2;
     private VoltageSensor voltageSensor;
